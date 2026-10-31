@@ -3,3 +3,5 @@ var/
 .env
 *.png
 .claude/skills
+package-lock.json
+preview/

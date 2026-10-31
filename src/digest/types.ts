@@ -14,6 +14,7 @@ export type DigestRow = {
 export type Night = {
   night: string;
   rows: DigestRow[]; // one per job, SORTED BY job ascending (page and JSON both use this order)
+  totals: { ok: number; retry: number; fail: number }; // parsed run-log LINES by status (not jobs)
   badLines: number; // lines that did not parse — counted, never thrown
 };
 

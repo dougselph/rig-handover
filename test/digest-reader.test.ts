@@ -16,6 +16,7 @@ describe('readNight', () => {
 
     expect(night.rows).toHaveLength(5);
     expect(night.badLines).toBe(1);
+    expect(night.totals).toEqual({ ok: 10, retry: 4, fail: 1 });
 
     // rows are sorted by job ascending
     expect(night.rows.map((r) => r.job)).toEqual([

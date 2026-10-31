@@ -97,6 +97,7 @@ export function readNight(runsDir: string, night: string): Night | null {
 
   const accs = new Map<string, Acc>();
   let badLines = 0;
+  const totals = { ok: 0, retry: 0, fail: 0 };
 
   for (const rawLine of text.split('\n')) {
     if (rawLine.trim() === '') continue; // blank/whitespace lines are ignored, not counted
@@ -105,6 +106,7 @@ export function readNight(runsDir: string, night: string): Night | null {
       badLines += 1;
       continue;
     }
+    totals[line.status] += 1;
     const existing = accs.get(line.job);
     if (existing === undefined) {
       accs.set(line.job, {
@@ -123,5 +125,5 @@ export function readNight(runsDir: string, night: string): Night | null {
 
   const rows = [...accs.values()].map(toRow).sort((a, b) => (a.job < b.job ? -1 : a.job > b.job ? 1 : 0));
 
-  return { night, rows, badLines };
+  return { night, rows, totals, badLines };
 }
